@@ -1,0 +1,21 @@
+.Invalid {
+    border: 1px solid #D31E2B !important;
+}
+
+.InputElement {
+    width: 100%;
+    border: none;
+    box-shadow: none;
+    border-bottom: solid 1px #333;
+    padding: 10px;
+    outline: none;
+}
+
+.Input {
+    display: flex;
+    align-items: flex-end;
+}
+
+.Input label {
+    margin-right: 10px;
+}

@@ -1,0 +1,11 @@
+.Search {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+}
+
+.Chart {
+    display: flex;
+    justify-items: center;
+    padding-bottom: 20px;
+}
