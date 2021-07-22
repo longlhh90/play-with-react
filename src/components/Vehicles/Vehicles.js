@@ -13,6 +13,7 @@ import Modal from '../UI/Modal/Modal';
 import VehicleForm from '../VehicleForm/VehicleForm';
 import Spinning from '../UI/Spinning/Spinning';
 
+const url = `${process.env.REACT_APP_SERVER_URL}/vehicles`
 
 const vehicleReducer = (currentVehicles, action) => {
     switch (action.type) {
@@ -72,7 +73,7 @@ const Vehicles = () => {
     //Add a vehicle to database on server
     const addVehicleHandler = useCallback(vehicle => {
         sendRequest(
-            `http://localhost:8080/vehicles/`,
+            `${url}`,
             'POST',
             JSON.stringify(vehicle),
             vehicle,
@@ -84,7 +85,7 @@ const Vehicles = () => {
     //Edit a vehicle in database on server
     const editVehicleHandler = useCallback((vehicleId, vehicle) => {
         sendRequest(
-            `http://localhost:8080/vehicles/${vehicleId}`,
+            `${url}/${vehicleId}`,
             'PUT',
             JSON.stringify(vehicle),
             { _id: vehicleId, ...vehicle },
@@ -97,7 +98,7 @@ const Vehicles = () => {
     const removeVehicleHandler = useCallback(
         vehicleId => {
             sendRequest(
-                `http://localhost:8080/vehicles/${vehicleId}`,
+                `${url}/${vehicleId}`,
                 'DELETE',
                 null,
                 vehicleId,
@@ -111,7 +112,7 @@ const Vehicles = () => {
     useEffect(() => {
         const timer = setTimeout(() => {
             sendRequest(
-                'http://localhost:8080/vehicles/',
+                `${url}/`,
                 'GET'
             );
         }, 500);
@@ -127,7 +128,7 @@ const Vehicles = () => {
     const searchedVehiclesHandler = useCallback(q => {
         const timer = setTimeout(() => {
             sendRequest(
-                'http://localhost:8080/vehicles/',
+                `${process.env.SERVER_URL}/vehicles/`,
                 'GET',
                 null,
                 q,
