@@ -2,6 +2,10 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Demo of the project
+
+Please visit [this link](http://lukas-react-app.herokuapp.com)
+
 ## Available Scripts
 
 In the project directory, you can run:
@@ -27,7 +31,3 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 ### Others scripts
 
 You can find more [here](https://create-react-app.dev/docs/available-scripts/
-
-### Demo of the project
-
-Please visit [this](http://lukas-react-app.herokuapp.com)
