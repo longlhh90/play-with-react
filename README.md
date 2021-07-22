@@ -30,4 +30,4 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 
 ### Others scripts
 
-You can find more [here](https://create-react-app.dev/docs/available-scripts/
+You can find more [here](https://create-react-app.dev/docs/available-scripts/)
