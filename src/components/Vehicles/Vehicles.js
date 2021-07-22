@@ -128,7 +128,7 @@ const Vehicles = () => {
     const searchedVehiclesHandler = useCallback(q => {
         const timer = setTimeout(() => {
             sendRequest(
-                `${process.env.SERVER_URL}/vehicles/`,
+                `${url}`,
                 'GET',
                 null,
                 q,
