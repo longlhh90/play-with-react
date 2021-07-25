@@ -1,19 +1,16 @@
-import React, { Component } from 'react';
-import classes from './Layout.module.css';
+import React from 'react';
+import SideBar from '../SideBar/SideBar';
+import { Container } from '@material-ui/core';
 
-class Layout extends Component {
-    state = {
-    }
-
-    render() {
-        return (
-            <React.Fragment>
-                <main className={classes.Content}>
-                    {this.props.children}
-                </main>
-            </React.Fragment>
-        )
-    }
+const Layout = (props) => {
+    return (
+        <React.Fragment>
+            <SideBar />
+            <Container>
+                {props.children}
+            </Container>
+        </React.Fragment>
+    )
 }
 
 export default Layout;

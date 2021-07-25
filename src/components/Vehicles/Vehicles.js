@@ -3,15 +3,17 @@ import { useDispatch } from 'react-redux';
 import { Chart } from "react-google-charts";
 import { resetVehicleForm, updateVehicleForm } from '../../store/actions/vehicleForm';
 import classes from './Vehicles.module.css';
-import VehicleItems from '../VehicleItems/VehicleItems';
-import Button from '../UI/Button/Button';
-import Input from '../UI/Input/Input';
 
 import useData from '../../hooks/dataService';
 
 import Modal from '../UI/Modal/Modal';
 import VehicleForm from '../VehicleForm/VehicleForm';
 import Spinning from '../UI/Spinning/Spinning';
+import VehicleTable from '../VehicleItems/VehicleItems';
+
+import clsx from 'clsx';
+import { FormControl, InputLabel, InputAdornment, IconButton, Input as MInput, Button as MButton } from '@material-ui/core';
+import SearchIcon from '@material-ui/icons/Search';
 
 const url = `${process.env.REACT_APP_SERVER_URL}/vehicles`
 
@@ -26,7 +28,7 @@ const vehicleReducer = (currentVehicles, action) => {
         case 'DELETE':
             return currentVehicles.filter(e => e._id !== action._id);
         case 'SEARCH':
-            return action.vehicles.filter(e => e.make.includes(action.query) || e.model.includes(action.query) || e.year === parseInt(action.query));
+            return action.vehicles.filter(e => e.make.toLowerCase().includes(action.query.toLowerCase()) || e.model.toLowerCase().includes(action.query.toLowerCase()) || e.year === parseInt(action.query));
 
         default:
             throw new Error('Action Type is wrong!');
@@ -181,7 +183,7 @@ const Vehicles = () => {
 
     const vehiclesList = useMemo(() => {
         return (
-            <VehicleItems
+            <VehicleTable
                 vehicleItems={Vehicles}
                 onRemoveItem={removeVehicleHandler}
                 onEditItem={onEditVehicleButtonClicked}
@@ -220,13 +222,24 @@ const Vehicles = () => {
                     vehicle_to_edit={edit_vehicle}
                 />
             </Modal>
-            <Button onclicked={() => onCreateVehicleButtonClicked()}>Add New Vehicle</Button>
+            <MButton variant="contained" color="primary" onClick={onCreateVehicleButtonClicked}>Add New Vehicle</MButton>
             <div className={classes.Search}>
-                <Input
-                    elementType='input'
-                    elementConfig={{ id: 'searchbox' }}
-                />
-                <Button icon="fa fa-search" onclicked={() => onSearch()} />
+                <FormControl className={clsx({ width: '25ch' })}>
+                    <InputLabel htmlFor="searchbox">Search</InputLabel>
+                    <MInput
+                        id="searchbox"
+                        endAdornment={
+                            <InputAdornment position="end">
+                                <IconButton
+                                    aria-label="Search the vehicles on Make Model and Year"
+                                    onClick={onSearch}
+                                >
+                                    <SearchIcon />
+                                </IconButton>
+                            </InputAdornment>
+                        }
+                    />
+                </FormControl>
             </div>
             {error && <Modal show bdClicked={clear}>{error}</Modal>}
             {vehiclesList}
